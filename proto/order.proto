@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package order;
+option go_package = "github.com/facelessEmptiness/order_service/proto;proto";
+
+service OrderService {
+  rpc CreateOrder(OrderRequest) returns (OrderResponse);
+  rpc GetOrder(OrderID) returns (OrderResponse);
+}
+
+message OrderRequest {
+  string user_id = 1;
+  repeated OrderItem items = 2;
+  string payment_method = 3;
+}
+
+message OrderItem {
+  string product_id = 1;
+  int32 quantity = 2;
+}
+
+message OrderResponse {
+  string id = 1;
+  string user_id = 2;
+  repeated OrderItem items = 3;
+  string payment_method = 4;
+  string status = 5;
+}
+
+message OrderID {
+  string id = 1;
+}
